@@ -3,12 +3,17 @@ const socketio = require('socket.io');
 const http = require('http');
 const path = require('path');
 
-const port = 8082;
+const { dirname } = require('path');
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const port = process.env.PORT || 8082;
 const app = express();
+
 
 const server = http.createServer(app);
 const io = socketio(server);
 
+require('dotenv').config();
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, "public")));
 
